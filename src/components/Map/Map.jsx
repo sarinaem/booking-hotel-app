@@ -13,9 +13,10 @@ function Map() {
     const lat = searchParams.get("lat");
     const lng = searchParams.get("lang");
     // console.log(lat, lng);
-    const {isLoading: isLoadingPosition,
+    const {
+      isLoading: isLoadingPosition,
       position: geolocationPosition,
-      getPosition
+      getPosition,
      } = useGeoLocation();
 
       useEffect(() => {
@@ -23,7 +24,7 @@ function Map() {
       }, [lat, lng]); //when do not use it so we write new useEffect
 
       useEffect(() =>{
-        if(geolocationPosition?.lat && geolocationPosition?.lng) setMapCenter(geolocationPosition?.lat, geolocationPosition?.lng)
+        if(geolocationPosition?.lat && geolocationPosition?.lng) setMapCenter([geolocationPosition?.lat], [geolocationPosition?.lng])
       }, [geolocationPosition])
 
 
@@ -56,7 +57,7 @@ function Map() {
 export default Map
 
 function ChangeCenter({ position }) {
-  const map = useMap();
-  map.setView(position);
-  return null;
+    const map = useMap();
+    map.setView(position);
+    return null;
 }
