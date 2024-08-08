@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { MdOutlineModeNight } from "react-icons/md";
-import { useHotels } from "../../context/HotelsProvider/HotelsProvider";
+import { useHotels } from "../context/HotelsProvider";
 function Hotels() {
-  const {isLoading, hotels} = useHotels();
+  const {isLoading, hotels, currentHotel} = useHotels();
     if (isLoading) return <Loader />;
     return (
     <div className="searchList">
@@ -12,7 +12,9 @@ function Hotels() {
     return <Link key={item.id} 
     to={`/hotels/${item.id}?lat=${item.latitude}&lang=${item.longitude}`}>
 
-        <div className="searchItem">
+        <div className={`searchItem ${item.id === currentHotel?.id ? "current-hotel" : ""}`}>
+            {/* 
+        <div className="searchItem current-hotel"> اینطوری روی همه اعمال میشه که مدنظرمون نیست */}
             <img src={item.xl_picture_url} alt={item.name} />
             <div className="searchItemDesc">
                 <p className="location">{item.smart_location}</p>

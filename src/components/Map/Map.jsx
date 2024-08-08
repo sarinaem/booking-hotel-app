@@ -1,11 +1,10 @@
-import { MapContainer, useMap, Marker, Popup, TileLayer } from "react-leaflet";
-import { useHotels } from "../../context/HotelsProvider/HotelsProvider"
+import { MapContainer, useMap, Marker, Popup, TileLayer, useMapEvent } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useGeoLocation from "../../hooks/useGeoLocation";
 
-function Map() {
-    const {isLoading, hotels} = useHotels(); // give data from hotels
+function Map({ markerLocations }) {
+    // const { hotels} = useHotels(); // give data from hotels
     const [mapCenter, setMapCenter] = useState([51, -3]);
     const [searchParams, setSearchParams] = useSearchParams();
   
@@ -24,7 +23,7 @@ function Map() {
       }, [lat, lng]); //when do not use it so we write new useEffect
 
       useEffect(() =>{
-        if(geolocationPosition?.lat && geolocationPosition?.lng) setMapCenter([geolocationPosition?.lat], [geolocationPosition?.lng])
+        if(geolocationPosition?.lat && geolocationPosition?.lng) setMapCenter([geolocationPosition?.lat, geolocationPosition?.lng])
       }, [geolocationPosition])
 
 
@@ -43,8 +42,9 @@ function Map() {
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
     />
+    <DetectClick />
     <ChangeCenter position={mapCenter} />
-    {hotels.map((item) => (
+    {markerLocations.map((item) => (
        <Marker key={item.id} position={[item.latitude, item.longitude]}>
         <Popup>{item.host_location}</Popup>
       </Marker>
@@ -59,5 +59,22 @@ export default Map
 function ChangeCenter({ position }) {
     const map = useMap();
     map.setView(position);
+    // console.log(map);
+
     return null;
+    
 }
+
+
+
+function DetectClick() {
+  const navigate = useNavigate()
+  useMapEvent({
+    click: e => navigate(`/bookmark/add?lat=${e.latlng.lat}&lng=${e.latlng.lng}`)
+    
+  })
+
+  return null;
+}
+
+

@@ -266,7 +266,9 @@
 
 .searchItem.current-hotel {
   border: 3px solid var(--primary-700);
+  
   border-radius: 1rem;
+  
 }
 
 @media screen and (min-width: 768px) {
