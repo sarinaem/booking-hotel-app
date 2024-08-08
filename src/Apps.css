@@ -291,7 +291,7 @@
   justify-content: space-between;
 }
 
-.bookmarkList .bookmarkItem.current-bookmark {
+.bookmarkList .bookmarkItem.current-bookmarkcurrent-bookmark {
   border: 2px solid var(--primary-600);
   background-color: var(--text-100);
 }

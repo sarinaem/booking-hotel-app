@@ -358,7 +358,7 @@
 
 .btn {
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
 }
 .btn--primary {
   background-color: var(--primary-600);
@@ -367,6 +367,8 @@
 
 .btn--back {
   border: 1px solid var(--text-400);
+  margin-bottom: 1rem;
+  color: var(--primary-600);
 }
 
 .formControl .flag {

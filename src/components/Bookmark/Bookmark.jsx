@@ -4,7 +4,7 @@ import Loader from "../Loader/Loader";
 import { Link } from "react-router-dom";
 
 function Bookmark() {
-   const {isLoading, bookmarks} = useBookmark();
+   const {isLoading, bookmarks, currentBookmark} = useBookmark();
    if(isLoading) return <Loader />
   return (
     <div>
@@ -12,8 +12,8 @@ function Bookmark() {
         <div className="bookmarkList">
             {bookmarks.map(item => {
                 return (
-                <Link to={`${item.id}?lat= ${item.latitude}&lng=${item.longitude}`} key={item.id}>
-                <div className="bookmarkItem ">
+                <Link to={`${item.id}?lat=${item.latitude}&lng=${item.longitude}`} key={item.id}>
+                <div className={`bookmarkItem ${item.id === currentBookmark?.id ? "current-bookmark" : ""}`}>~   
                     <ReactCountryFlag svg countryCode={item.countryCode}/>
                     &nbsp; <strong>{item.cityName}</strong> &nbsp;
                     <span>{item.country}</span>

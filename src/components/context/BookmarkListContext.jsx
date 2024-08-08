@@ -12,11 +12,12 @@ function BookmarkListProvider({children}) {
 
         async function getBookmark(id) {
             setIsLoadingCurrentBookmark(true);
+            setCurrentBookmark(null);
       try {
          const { data } = await axios.get(`${BASE_URL}/bookmarks/${id}`);
          
          setCurrentBookmark(data);
-         setIsLoadingCurrentBookmark(false)
+         setIsLoadingCurrentBookmark(false);
   } catch (error) {
         toast.error(error.message);
         setIsLoadingCurrentBookmark(false);
@@ -25,7 +26,12 @@ function BookmarkListProvider({children}) {
       
       
   return (
-    <BookmarkContext.Provider value={{isLoading, bookmarks, getBookmark, currentBookmark, isLoadingCurrentBookmark}}>
+    <BookmarkContext.Provider value={{
+     isLoading,
+     bookmarks,
+     getBookmark,
+     currentBookmark,
+     isLoadingCurrentBookmark}}>
         {children}
     </BookmarkContext.Provider>
   )
