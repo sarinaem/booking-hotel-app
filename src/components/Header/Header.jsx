@@ -12,7 +12,7 @@ function Header() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [destination, setDestination] = useState(searchParams.get("destination") || "");
-  console.log(searchParams.get("destination"));
+  // console.log(searchParams.get("destination"));
   const [openOption, setOpenOption] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,

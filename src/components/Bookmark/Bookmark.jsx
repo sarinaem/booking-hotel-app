@@ -13,10 +13,12 @@ function Bookmark() {
             {bookmarks.map(item => {
                 return (
                 <Link to={`${item.id}?lat=${item.latitude}&lng=${item.longitude}`} key={item.id}>
-                <div className={`bookmarkItem ${item.id === currentBookmark?.id ? "current-bookmark" : ""}`}>~   
-                    <ReactCountryFlag svg countryCode={item.countryCode}/>
-                    &nbsp; <strong>{item.cityName}</strong> &nbsp;
-                    <span>{item.country}</span>
+                <div className={`bookmarkItem ${item.id === currentBookmark?.id ? "current-bookmark" : ""}`}>   
+                    <div>
+                    <ReactCountryFlag svg countryCode={item.countryCode} />
+                  &nbsp; <strong>{item.cityName}</strong> &nbsp;
+                  <span>{item.country}</span>
+                    </div>
                 </div>
                 </Link>
                 );

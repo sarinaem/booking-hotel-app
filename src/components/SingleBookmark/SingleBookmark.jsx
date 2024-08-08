@@ -25,8 +25,6 @@ function SingleBookmark() {
         <button onClick={handleBack} className="btn btn--back">&larr; back</button>
         <h2>{currentBookmark.cityName}</h2>
         <p>{currentBookmark.cityName} - {currentBookmark.country}</p>
-        
-
     </div>
   )
 }

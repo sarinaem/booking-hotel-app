@@ -2,9 +2,9 @@ import { createContext, useContext, useState } from "react"
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import toast from "react-hot-toast";
+const BASE_URL = "http://localhost:5000";
 
 const BookmarkContext = createContext();
-const BASE_URL = "http://localhost:5000";
 function BookmarkListProvider({children}) {
   const [currentBookmark, setCurrentBookmark] = useState(null); //or useState({}) 
   const [isLoadingCurrentBookmark, setIsLoadingCurrentBookmark] = useState(false);
@@ -23,6 +23,7 @@ function BookmarkListProvider({children}) {
         setIsLoadingCurrentBookmark(false);
           }
         }
+        
       
       
   return (
@@ -31,7 +32,8 @@ function BookmarkListProvider({children}) {
      bookmarks,
      getBookmark,
      currentBookmark,
-     isLoadingCurrentBookmark}}>
+     isLoadingCurrentBookmark
+     }}>
         {children}
     </BookmarkContext.Provider>
   )
