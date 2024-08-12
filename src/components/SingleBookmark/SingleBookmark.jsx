@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useBookmark } from "../context/BookmarkListContext";
 import { useEffect } from "react";
 import Loader from "../Loader/Loader";
+import ReactCountryFlag from "react-country-flag";
 
 function SingleBookmark() {
     const {id} = useParams();
@@ -13,18 +14,24 @@ function SingleBookmark() {
   }, [id]);
 
 
-  const handleBack = e => {
-    e.preventDefault();
-    navigate(-1);
-  }
+  // const handleBack = e => {
+  //   e.preventDefault();
+  //   navigate(-1);
+  // }
 
   if(isLoadingCurrentBookmark || !currentBookmark) return <Loader/>
 
   return (
     <div>
-        <button onClick={handleBack} className="btn btn--back">&larr; back</button>
         <h2>{currentBookmark.cityName}</h2>
-        <p>{currentBookmark.cityName} - {currentBookmark.country}</p>
+        <div className="bookmarkItem" style={{marginTop: "2rem"}}>
+           <ReactCountryFlag svg countryCode={currentBookmark.countryCode} />
+            &nbsp; <strong>{currentBookmark.cityName}</strong> &nbsp;
+            <span>{currentBookmark.country}</span>
+        </div>
+        <button onClick={() => navigate(-1)} className="btn btn--back">&larr; back </button>
+
+      
     </div>
   )
 }
